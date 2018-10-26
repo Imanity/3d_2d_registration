@@ -15,27 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="3d_2d_registration.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageData.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="VolumeData.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Solver.cpp">
+    <ClCompile Include="DSAReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ImageData.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="VolumeData.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Solver.h">
+    <ClInclude Include="DSAReader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
