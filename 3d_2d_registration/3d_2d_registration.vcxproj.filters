@@ -27,6 +27,9 @@
     <ClCompile Include="Solver.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Projection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageData.h">
@@ -36,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Solver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

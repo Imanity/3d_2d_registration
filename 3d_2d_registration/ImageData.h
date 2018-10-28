@@ -21,4 +21,5 @@ public:
 	cv::Mat data;
 	int nx, ny;
 	float dx, dy;
+	int distance_source_detector, distance_source_patient;
 };

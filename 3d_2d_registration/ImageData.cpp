@@ -70,6 +70,8 @@ void ImageData::readFromDSAFile(std::string file_path, int n) {
 	data = data(cv::Rect(left, top, right - left, bottom - top));
 	nx = data.cols;
 	ny = data.rows;
+	distance_source_detector = dsa.distance_source_detector;
+	distance_source_patient = dsa.distance_source_patient;
 }
 
 int ImageData::at(int x, int y) {

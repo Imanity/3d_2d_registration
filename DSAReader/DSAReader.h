@@ -21,4 +21,5 @@ public:
 	std::vector<cv::Mat> dsa;
 	int frame_num;
 	float pixel_spacing[2];
+	float distance_source_detector, distance_source_patient;
 };

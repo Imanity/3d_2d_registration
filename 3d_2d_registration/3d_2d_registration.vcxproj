@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="3d_2d_registration.cpp" />
     <ClCompile Include="ImageData.cpp" />
+    <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Solver.cpp" />
     <ClCompile Include="VolumeData.cpp" />
   </ItemGroup>
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageData.h" />
+    <ClInclude Include="Projection.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="VolumeData.h" />
   </ItemGroup>
