@@ -12,11 +12,18 @@ public:
 	~Solver();
 
 	void addVolumeData(VolumeData *);
-	void addImageData(ImageData *);
+	void addImageData(ImageData *, Eigen::Vector3d R_vector);
 
-	void solve(std::vector<Eigen::Vector3d> initial_value);
+	void solve();
+
+	void showProjectionResult(std::string attr);
+
+private:
+	Eigen::Matrix3d rotate_vector2matrix(Eigen::Vector3d &v);
 
 private:
 	VolumeData * volume;
+	std::vector<Eigen::Vector3d> voxels;
 	std::vector<ImageData *> images;
+	std::vector<Eigen::VectorXd> transforms;
 };
