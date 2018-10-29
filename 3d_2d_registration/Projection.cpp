@@ -29,9 +29,9 @@ cv::Mat Projection::perspective(std::vector<Eigen::Vector3d> &Xs, ImageData *img
 	for (int i = 0; i < Ys.size(); ++i) {
 		double x = Ys[i](0) / img->dx + img->nx / 2;
 		double y = Ys[i](1) / img->dy + img->ny / 2;
-		if (x < 0 || x >= img->nx)
+		if ((int)x < 0 || (int)x >= img->nx)
 			continue;
-		if (y < 0 || y >= img->ny)
+		if ((int)y < 0 || (int)y >= img->ny)
 			continue;
 		fuse.at<cv::Vec3b>(y, x)(0) = 255;
 	}

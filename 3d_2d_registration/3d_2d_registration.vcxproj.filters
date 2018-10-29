@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\LBFGS">
+      <UniqueIdentifier>{762f6a2b-e2d3-41e2-92d4-e30c35ea2f05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3d_2d_registration.cpp">
@@ -43,6 +46,15 @@
     </ClInclude>
     <ClInclude Include="Projection.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LBFGS\Param.h">
+      <Filter>头文件\LBFGS</Filter>
+    </ClInclude>
+    <ClInclude Include="LBFGS\LineSearch.h">
+      <Filter>头文件\LBFGS</Filter>
+    </ClInclude>
+    <ClInclude Include="LBFGS.h">
+      <Filter>头文件\LBFGS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

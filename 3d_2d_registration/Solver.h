@@ -19,11 +19,14 @@ public:
 	void showProjectionResult(std::string attr);
 
 private:
-	Eigen::Matrix3d rotate_vector2matrix(Eigen::Vector3d &v);
-
-private:
 	VolumeData * volume;
 	std::vector<Eigen::Vector3d> voxels;
 	std::vector<ImageData *> images;
 	std::vector<Eigen::VectorXd> transforms;
 };
+
+static Eigen::Matrix3d rotate_vector2matrix(Eigen::Vector3d &v);
+static double foo(const Eigen::VectorXd &x, Eigen::VectorXd &grad);
+static double loss_func(const Eigen::VectorXd &x);
+extern std::vector<Eigen::Vector3d> X;
+extern std::vector<ImageData *> Y;

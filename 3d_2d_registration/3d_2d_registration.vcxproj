@@ -163,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageData.h" />
+    <ClInclude Include="LBFGS.h" />
+    <ClInclude Include="LBFGS\LineSearch.h" />
+    <ClInclude Include="LBFGS\Param.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="VolumeData.h" />
