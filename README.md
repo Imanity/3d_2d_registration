@@ -10,7 +10,7 @@ Still working...
 
 ### Intro
 * Before register:
-![front_before](/Gallary/initial_0.png)![side_before](/Gallary/initial_1.png)
+<img src="/Gallary/initial_0.png" width=30% /><img src="/Gallary/initial_1.png" width=30% />
 
 * After register:
-![front_after](/Gallary/result_0.png)![side_after](/Gallary/result_1.png)
+<img src="/Gallary/result_0.png" width=30% /><img src="/Gallary/result_1.png" width=30% />
