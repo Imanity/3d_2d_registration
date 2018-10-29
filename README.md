@@ -10,7 +10,7 @@ Still working...
 
 ### Intro
 * Before register:
-![front_before](/Gallary/initial_0.png)![side_before](/gallary/initial_1.png)
+![front_before](/Gallary/initial_0.png)![side_before](/Gallary/initial_1.png)
 
 * After register:
-![front_after](/Gallary/result_0.png)![side_after](/gallary/result_1.png)
+![front_after](/Gallary/result_0.png)![side_after](/Gallary/result_1.png)
