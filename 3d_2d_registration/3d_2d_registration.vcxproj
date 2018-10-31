@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="3d_2d_registration.cpp" />
     <ClCompile Include="ImageData.cpp" />
+    <ClCompile Include="KDTree.cpp" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Solver.cpp" />
     <ClCompile Include="VolumeData.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageData.h" />
+    <ClInclude Include="KDTree.h" />
     <ClInclude Include="LBFGS.h" />
     <ClInclude Include="LBFGS\LineSearch.h" />
     <ClInclude Include="LBFGS\Param.h" />

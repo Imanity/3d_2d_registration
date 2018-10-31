@@ -33,6 +33,9 @@
     <ClCompile Include="Projection.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="KDTree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageData.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="LBFGS.h">
       <Filter>头文件\LBFGS</Filter>
+    </ClInclude>
+    <ClInclude Include="KDTree.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,8 @@ void ImageData::readFromDSAFile(std::string file_path, int n) {
 	data = dsa.dsa[n];
 	dx = dsa.pixel_spacing[0];
 	dy = dsa.pixel_spacing[1];
+	nx = data.cols;
+	ny = data.rows;
 	int left = 0, right = data.cols - 1, top = 0, bottom = data.rows - 1;
 	while (left < data.cols) {
 		bool is_blank = true;
@@ -75,10 +77,25 @@ void ImageData::readFromDSAFile(std::string file_path, int n) {
 }
 
 int ImageData::at(int x, int y) {
+	if (x < 0)
+		x = 0;
+	if (x >= nx)
+		x = nx - 1;
+	if (y < 0)
+		y = 0;
+	if (y >= ny)
+		y = ny - 1;
 	return data.at<uchar>(y, x);
 }
 int ImageData::at(Eigen::Vector2i pos) {
-	return data.at<uchar>(pos(1), pos(0));
+	return at(pos(0), pos(1));
+}
+
+double ImageData::linear(double x, double y) {
+	int _x = floor(x), x_ = ceil(x);
+	int _y = floor(y), y_ = ceil(y);
+	double lx = x - _x, ly = y - _y;
+	return lx * ly * at(x_, y_) + (1 - lx) * (1 - ly) * at(_x, _y) + lx * (1 - ly) * at(x_, _y) + ly * (1 - lx) * at(_x, y_);
 }
 
 void ImageData::set(int x, int y, int new_data) {
@@ -93,4 +110,37 @@ void ImageData::show() {
 		cv::resize(data, data_transformed, cv::Size(dx / dy * data.cols, data.rows));
 	cv::imshow("Image", data_transformed);
 	cv::waitKey();
+}
+
+void ImageData::binaryzation() {
+	for (int i = 0; i < nx; ++i) for (int j = 0; j < ny; ++j) {
+		data.at<uchar>(j, i) = data.at<uchar>(j, i) < 100 ? 0 : 255;
+	}
+	cv::Mat data_filtered = data.clone();
+	for (int i = 0; i < nx; ++i) for (int j = 0; j < ny; ++j) {
+		int num = 0, sum = 0;
+		for (int x = -1; x <= 1; ++x) for (int y = -1; y <= 1; ++y) {
+			if (i + x < 0 || i + x >= nx || j + y < 0 || j + y >= ny)
+				continue;
+			sum++;
+			if (data.at<uchar>(j + y, i + x))
+				num++;
+		}
+		if (num >= sum / 2)
+			data_filtered.at<uchar>(j, i) = 255;
+		else
+			data_filtered.at<uchar>(j, i) = 0;
+	}
+	for (int i = 0; i < nx; ++i) for (int j = 0; j < ny; ++j)
+		data.at<uchar>(j, i) = data_filtered.at<uchar>(j, i);
+
+	std::vector<Eigen::Vector2d> binary_points;
+	for (int i = 0; i < nx; ++i) for (int j = 0; j < ny; ++j) {
+		if (at(i, j)) {
+			Eigen::Vector2d p;
+			p << dx * i, dy * j;
+			binary_points.push_back(p);
+		}
+	}
+	kdtree = KDTree(binary_points);
 }

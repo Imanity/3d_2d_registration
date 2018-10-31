@@ -34,6 +34,7 @@ cv::Mat Projection::perspective(std::vector<Eigen::Vector3d> &Xs, ImageData *img
 		if ((int)y < 0 || (int)y >= img->ny)
 			continue;
 		fuse.at<cv::Vec3b>(y, x)(0) = 255;
+		fuse.at<cv::Vec3b>(y, x)(1) = fuse.at<cv::Vec3b>(y, x)(2) = 0;
 	}
 	return fuse;
 }
