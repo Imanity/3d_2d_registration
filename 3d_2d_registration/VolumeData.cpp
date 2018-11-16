@@ -84,3 +84,23 @@ void VolumeData::set(int x, int y, int z, short new_data) {
 	if (i < 0) return;
 	this->data[i] = new_data;
 }
+
+void VolumeData::erode(int r) {
+	short* data_copy = new short[nvox];
+	for (int i = 0; i < nvox; ++i)
+		data_copy[i] = data[i];
+	for (int i = 0; i < nvox; ++i) {
+		if (!data[i]) {
+			Eigen::Vector3i c = coord(i);
+			for (int x = -r; x <= r; ++x) for (int y = -r; y <= r; ++y) for (int z = -r; z <= r; ++z) {
+				int id = idx(c(0) + x, c(1) + y, c(2) + z);
+				if (id <= 0)
+					continue;
+				data_copy[id] = 0;
+			}
+		}
+	}
+	for (int i = 0; i < nvox; ++i)
+		data[i] = data_copy[i];
+	delete[] data_copy;
+}

@@ -22,6 +22,8 @@ public:
 
 	void set(int x, int y, int z, short new_data);
 
+	void erode(int r);
+
 public:
 	short* data;
 	int nx, ny, nz;

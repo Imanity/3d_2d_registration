@@ -102,25 +102,10 @@ double foo(const Eigen::VectorXd &x, Eigen::VectorXd &grad) {
 }
 
 double loss_func(const Eigen::VectorXd &x) {
-	int overlap_d = 10;
-
 	clock_t start, stop;
 	start = clock();
 
-	std::vector<std::vector<Eigen::Vector2d>> ys;
-
-	std::vector<std::vector<double>> loss;
-	
-	std::vector<std::vector<double>> lambda;
-
-	for (int i = 0; i < Y.size(); ++i) {
-		std::vector<Eigen::Vector2d> y;
-		ys.push_back(y);
-		std::vector<double> loss_image(X.size(), 0);
-		loss.push_back(loss_image);
-		std::vector<double> lambda_image(X.size(), 1.0 / Y.size());
-		lambda.push_back(lambda_image);
-	}
+	double total_loss = 0;
 
 	for (int i = 0; i < Y.size(); ++i) {
 		Eigen::Vector3d R_vector;
@@ -132,42 +117,19 @@ double loss_func(const Eigen::VectorXd &x) {
 
 		double N = x(7 * i + 6);
 
-		ys[i] = Projection::perspective(X, R, T, N);
+		std::vector<Eigen::Vector2d> ys = Projection::perspective(X, R, T, N);
 
-		for (int j = 0; j < ys[i].size(); ++j) {
-			double x_proj = ys[i][j](0) / Y[i]->dx + Y[i]->nx / 2;
-			double y_proj = ys[i][j](1) / Y[i]->dy + Y[i]->ny / 2;
-			loss[i][j] = Y[i]->linear(x_proj, y_proj);
+		for (int j = 0; j < ys.size(); ++j) {
+			double x_proj = ys[j](0) / Y[i]->dx + Y[i]->nx / 2;
+			double y_proj = ys[j](1) / Y[i]->dy + Y[i]->ny / 2;
+			total_loss += Y[i]->linear(x_proj, y_proj);
 		}
-	}
-
-	for (int j = 0; j < X.size(); ++j) {
-		double sum = 0;
-		for (int i = 0; i < Y.size(); ++i)
-			sum += lambda[i][j];
-		if (sum <= 0) {
-			for (int i = 0; i < Y.size(); ++i)
-				lambda[i][j] = 1.0 / Y.size();
-			continue;
-		}
-		for (int i = 0; i < Y.size(); ++i)
-			lambda[i][j] = lambda[i][j] / sum;
-	}
-
-	double total_loss = 0;
-	for (int i = 0; i < Y.size(); ++i) for (int j = 0; j < X.size(); ++j) {
-		total_loss += lambda[i][j] * loss[i][j];
 	}
 
 	total_loss /= X.size();
-	total_loss /= 255.0;
+	total_loss /= Y.size();
 
 	stop = clock();
-	/*std::cout << "x: ";
-	for (int i = 0; i < x.rows(); ++i) {
-		std::cout << x(i) << ", ";
-	}
-	std::cout << std::endl;*/
 	std::cout << "Loss: " << total_loss << ", used " << stop - start << "ms." << std::endl;
 	return total_loss;
 }
