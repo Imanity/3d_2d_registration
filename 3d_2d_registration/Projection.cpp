@@ -23,7 +23,7 @@ std::vector<Eigen::Vector2d> Projection::perspective(std::vector<Eigen::Vector3d
 cv::Mat Projection::perspective(std::vector<Eigen::Vector3d> &Xs, ImageData *img, Eigen::Matrix3d &R, Eigen::Vector3d &T, double N) {
 	cv::Mat fuse(img->ny, img->nx, CV_8UC3, cv::Scalar::all(0));
 	for (int i = 0; i < img->ny; ++i) for (int j = 0; j < img->nx; ++j) {
-		fuse.at<cv::Vec3b>(i, j)(0) = fuse.at<cv::Vec3b>(i, j)(1) = fuse.at<cv::Vec3b>(i, j)(2) = img->at(j, i);
+		fuse.at<cv::Vec3b>(i, j)(0) = fuse.at<cv::Vec3b>(i, j)(1) = fuse.at<cv::Vec3b>(i, j)(2) = img->at(img->n, j, i);
 	}
 	std::vector<Eigen::Vector2d> Ys = perspective(Xs, R, T, N);
 	for (int i = 0; i < Ys.size(); ++i) {

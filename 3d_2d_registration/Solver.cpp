@@ -122,7 +122,7 @@ double loss_func(const Eigen::VectorXd &x) {
 		for (int j = 0; j < ys.size(); ++j) {
 			double x_proj = ys[j](0) / Y[i]->dx + Y[i]->nx / 2;
 			double y_proj = ys[j](1) / Y[i]->dy + Y[i]->ny / 2;
-			total_loss += Y[i]->linear(x_proj, y_proj);
+			total_loss += Y[i]->linear(Y[i]->n, x_proj, y_proj);
 		}
 	}
 

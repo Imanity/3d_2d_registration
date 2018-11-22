@@ -3,7 +3,7 @@
 #include <vector>
 #include <Eigen/Dense>
 
-class VolumeData {
+class __declspec(dllexport) VolumeData {
 public:
 	VolumeData();
 	~VolumeData();

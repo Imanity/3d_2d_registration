@@ -5,28 +5,30 @@
 
 #include "KDTree.h"
 
-class ImageData {
+class __declspec(dllexport) ImageData {
 public:
 	ImageData();
 	~ImageData();
 
-	void readFromDSAFile(std::string file_path, int n);
+	void readFromDSAFile(std::string file_path);
 
-	int at(int x, int y);
-	int at(Eigen::Vector2i pos);
+	int at(int n, int x, int y);
+	int at(int n, Eigen::Vector2i pos);
 
-	double linear(double x, double y);
+	double linear(int n, double x, double y);
 
-	void set(int x, int y, int new_data);
+	void set(int n, int x, int y, int new_data);
 
-	void show();
+	void show(int n);
 
 	void binaryzation();
 
+	void setMainID(int);
+
 public:
-	cv::Mat data;
+	int n = 0;
+	std::vector<cv::Mat> data;
 	int nx, ny;
 	float dx, dy;
 	int distance_source_detector, distance_source_patient;
-	KDTree kdtree;
 };

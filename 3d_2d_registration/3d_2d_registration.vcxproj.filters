@@ -62,5 +62,8 @@
     <ClInclude Include="KDTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="3d_2d_registration.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
