@@ -15,7 +15,7 @@ public:
 	RegistrationSolver(VolumeData *v, std::vector<ImageData *> imgs, std::vector<Eigen::Vector3d> Rs);
 	~RegistrationSolver();
 	
-	void Solve();
+	std::vector<Eigen::VectorXd> Solve();
 
 public:
 	Solver solver;

@@ -4,6 +4,7 @@
 #include <vtkRenderer.h>
 #include <vtkSmartPointer.h>
 #include <vtkPolyData.h>
+#include <vtkFloatArray.h>
 
 #include <QVTKWidget.h>
 
@@ -16,7 +17,8 @@ VTK_MODULE_INIT(vtkRenderingFreeType);
 
 enum RENDERING_MODE {
 	VOLUME_RENDERING, 
-	MESH_RENDERING
+	MESH_RENDERING, 
+	MESH_RENDERING_WITH_SCALARS
 };
 
 class VtkWidget : public QVTKWidget {
@@ -26,15 +28,20 @@ public:
 	VtkWidget(QWidget *parent);
 	~VtkWidget();
 
+public:
+	vtkSmartPointer<vtkPolyData> mesh;
+
 private:
 	vtkSmartPointer<vtkRenderer> renderer;
-	vtkSmartPointer<vtkPolyData> mesh;
 	VolumeData *volume = NULL;
-	RENDERING_MODE renderingMode = VOLUME_RENDERING;
+	RENDERING_MODE renderingMode = MESH_RENDERING;
 	bool isFirstRead;
+
+	vtkSmartPointer<vtkFloatArray> mesh_scalars;
 
 public:
 	void setVolume(VolumeData *);
 	void setRenderingMode(RENDERING_MODE mode);
 	void updateView();
+	void updateScalars(std::vector<int> &scalars);
 };

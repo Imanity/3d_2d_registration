@@ -13,9 +13,12 @@
 #include <vtkPolyDataConnectivityFilter.h>
 #include <vtkNew.h>
 #include <vtkSmoothPolyDataFilter.h>
+#include <vtkLookupTable.h>
 
 VtkWidget::VtkWidget(QWidget *parent) : QVTKWidget(parent) {
-	renderingMode = VOLUME_RENDERING;
+	renderingMode = MESH_RENDERING;
+
+	mesh_scalars = vtkSmartPointer<vtkFloatArray>::New();
 
 	this->renderer = vtkSmartPointer<vtkRenderer>::New();
 	//this->renderer->SetBackground(255, 255, 255);
@@ -111,7 +114,7 @@ void VtkWidget::updateView() {
 		volumeVTK->SetMapper(volumeMapper);
 		volumeVTK->SetProperty(volumeProperty);
 		renderer->AddViewProp(volumeVTK);
-	} else {
+	} else if (renderingMode == MESH_RENDERING) {
 		vtkSmartPointer<vtkPolyDataMapper> vessel_mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		vessel_mapper->SetInputData(mesh);
 		vessel_mapper->ScalarVisibilityOff();
@@ -119,6 +122,22 @@ void VtkWidget::updateView() {
 		vtkSmartPointer<vtkActor> vessel_actor = vtkSmartPointer<vtkActor>::New();
 		vessel_actor->SetMapper(vessel_mapper);
 		vessel_actor->GetProperty()->SetColor(1.0, 0.1, 0.0);
+
+		this->renderer->AddActor(vessel_actor);
+	} else if (renderingMode == MESH_RENDERING_WITH_SCALARS) {
+		vtkSmartPointer<vtkLookupTable> color_table = vtkSmartPointer<vtkLookupTable>::New();
+		color_table->SetNumberOfColors(2);
+		color_table->SetTableValue(0, 1.0, 0.1, 0.0);
+		color_table->SetTableValue(1, 0.2, 0.2, 0.2);
+		color_table->Build();
+
+		vtkSmartPointer<vtkPolyDataMapper> vessel_mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
+		vessel_mapper->SetInputData(mesh);
+		vessel_mapper->SetScalarRange(0, 1);
+		vessel_mapper->SetLookupTable(color_table);
+
+		vtkSmartPointer<vtkActor> vessel_actor = vtkSmartPointer<vtkActor>::New();
+		vessel_actor->SetMapper(vessel_mapper);
 
 		this->renderer->AddActor(vessel_actor);
 	}
@@ -129,4 +148,10 @@ void VtkWidget::updateView() {
 	}
 	this->GetRenderWindow()->Render();
 	this->update();
+}
+
+void VtkWidget::updateScalars(std::vector<int> &scalars) {
+	for (int i = 0; i < scalars.size(); ++i) {
+		mesh_scalars->InsertNextTuple1(scalars[i]);
+	}
 }

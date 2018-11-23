@@ -6,7 +6,7 @@
 
 #include "ImageData.h"
 
-class Projection {
+class __declspec(dllexport) Projection {
 public:
 	Projection();
 	~Projection();
