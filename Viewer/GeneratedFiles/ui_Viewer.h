@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Viewer.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.0
+** Created by: Qt User Interface Compiler version 5.11.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -12,9 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -160,19 +158,19 @@ public:
 
     void retranslateUi(QMainWindow *ViewerClass)
     {
-        ViewerClass->setWindowTitle(QApplication::translate("ViewerClass", "Viewer", Q_NULLPTR));
-        actionRegister->setText(QApplication::translate("ViewerClass", "Register", Q_NULLPTR));
+        ViewerClass->setWindowTitle(QApplication::translate("ViewerClass", "Viewer", nullptr));
+        actionRegister->setText(QApplication::translate("ViewerClass", "Register", nullptr));
 #ifndef QT_NO_TOOLTIP
-        actionRegister->setToolTip(QApplication::translate("ViewerClass", "\351\205\215\345\207\206", Q_NULLPTR));
+        actionRegister->setToolTip(QApplication::translate("ViewerClass", "\351\205\215\345\207\206", nullptr));
 #endif // QT_NO_TOOLTIP
-        actionFuse->setText(QApplication::translate("ViewerClass", "Fuse", Q_NULLPTR));
+        actionFuse->setText(QApplication::translate("ViewerClass", "Fuse", nullptr));
 #ifndef QT_NO_TOOLTIP
-        actionFuse->setToolTip(QApplication::translate("ViewerClass", "\350\236\215\345\220\210", Q_NULLPTR));
+        actionFuse->setToolTip(QApplication::translate("ViewerClass", "\350\236\215\345\220\210", nullptr));
 #endif // QT_NO_TOOLTIP
-        label->setText(QApplication::translate("ViewerClass", "\344\275\223\346\225\260\346\215\256", Q_NULLPTR));
-        volumeAdd->setText(QApplication::translate("ViewerClass", "+", Q_NULLPTR));
-        label_2->setText(QApplication::translate("ViewerClass", "\344\272\214\347\273\264\345\233\276\345\203\217", Q_NULLPTR));
-        imageAdd->setText(QApplication::translate("ViewerClass", "+", Q_NULLPTR));
+        label->setText(QApplication::translate("ViewerClass", "\344\275\223\346\225\260\346\215\256", nullptr));
+        volumeAdd->setText(QApplication::translate("ViewerClass", "+", nullptr));
+        label_2->setText(QApplication::translate("ViewerClass", "\344\272\214\347\273\264\345\233\276\345\203\217", nullptr));
+        imageAdd->setText(QApplication::translate("ViewerClass", "+", nullptr));
     } // retranslateUi
 
 };

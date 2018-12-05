@@ -14,6 +14,7 @@
 #include <vtkNew.h>
 #include <vtkSmoothPolyDataFilter.h>
 #include <vtkLookupTable.h>
+#include <vtkPointData.h>
 
 VtkWidget::VtkWidget(QWidget *parent) : QVTKWidget(parent) {
 	renderingMode = MESH_RENDERING;
@@ -154,4 +155,5 @@ void VtkWidget::updateScalars(std::vector<int> &scalars) {
 	for (int i = 0; i < scalars.size(); ++i) {
 		mesh_scalars->InsertNextTuple1(scalars[i]);
 	}
+	mesh->GetPointData()->SetScalars(mesh_scalars);
 }
