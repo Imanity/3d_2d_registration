@@ -39,5 +39,6 @@ void ImgWidget::wheelEvent(QWheelEvent* event) {
 		data->n = 0;
 	if (data->n >= data->data.size())
 		data->n = data->data.size() - 1;
+	emit updateN(data->n);
 	updateView();
 }

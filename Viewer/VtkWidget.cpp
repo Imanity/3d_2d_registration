@@ -19,8 +19,6 @@
 VtkWidget::VtkWidget(QWidget *parent) : QVTKWidget(parent) {
 	renderingMode = MESH_RENDERING;
 
-	mesh_scalars = vtkSmartPointer<vtkFloatArray>::New();
-
 	this->renderer = vtkSmartPointer<vtkRenderer>::New();
 	//this->renderer->SetBackground(255, 255, 255);
 	this->GetRenderWindow()->AddRenderer(this->renderer);
@@ -126,6 +124,8 @@ void VtkWidget::updateView() {
 
 		this->renderer->AddActor(vessel_actor);
 	} else if (renderingMode == MESH_RENDERING_WITH_SCALARS) {
+		mesh->GetPointData()->SetScalars(mesh_scalars[current_scalar_id]);
+
 		vtkSmartPointer<vtkLookupTable> color_table = vtkSmartPointer<vtkLookupTable>::New();
 		color_table->SetNumberOfColors(2);
 		color_table->SetTableValue(0, 1.0, 0.1, 0.0);
@@ -151,9 +151,13 @@ void VtkWidget::updateView() {
 	this->update();
 }
 
-void VtkWidget::updateScalars(std::vector<int> &scalars) {
+void VtkWidget::updateScalars(std::vector<std::vector<int>> &scalars) {
+	mesh_scalars.clear();
 	for (int i = 0; i < scalars.size(); ++i) {
-		mesh_scalars->InsertNextTuple1(scalars[i]);
+		vtkSmartPointer<vtkFloatArray> s = vtkSmartPointer<vtkFloatArray>::New();
+		for (int j = 0; j < scalars[i].size(); ++j) {
+			s->InsertNextTuple1(scalars[i][j]);
+		}
+		mesh_scalars.push_back(s);
 	}
-	mesh->GetPointData()->SetScalars(mesh_scalars);
 }

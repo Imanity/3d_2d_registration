@@ -19,6 +19,8 @@ public slots:
 	void updateVolumeSelected();
 	void updateImageSelected();
 
+	void updateImageN(int n);
+
 	void registerVolumeImage();
 	void fuseVolumeImage();
 

@@ -30,6 +30,7 @@ public:
 
 public:
 	vtkSmartPointer<vtkPolyData> mesh;
+	int current_scalar_id = 0;
 
 private:
 	vtkSmartPointer<vtkRenderer> renderer;
@@ -37,11 +38,11 @@ private:
 	RENDERING_MODE renderingMode = MESH_RENDERING;
 	bool isFirstRead;
 
-	vtkSmartPointer<vtkFloatArray> mesh_scalars;
+	std::vector<vtkSmartPointer<vtkFloatArray>> mesh_scalars;
 
 public:
 	void setVolume(VolumeData *);
 	void setRenderingMode(RENDERING_MODE mode);
 	void updateView();
-	void updateScalars(std::vector<int> &scalars);
+	void updateScalars(std::vector<std::vector<int>> &scalars);
 };

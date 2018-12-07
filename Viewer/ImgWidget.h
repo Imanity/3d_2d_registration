@@ -12,8 +12,7 @@
 
 #include "../3d_2d_registration/ImageData.h"
 
-class ImgWidget : public QWidget
-{
+class ImgWidget : public QWidget {
 	Q_OBJECT
 
 public:
@@ -23,6 +22,9 @@ public:
 	void setImage(ImageData *);
 	void updateView();
 	void wheelEvent(QWheelEvent* event);
+
+signals:
+	void updateN(int n);
 
 private:
 	Ui::ImgWidget ui;

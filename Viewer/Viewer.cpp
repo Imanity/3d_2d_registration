@@ -19,6 +19,8 @@ Viewer::Viewer(QWidget *parent)	: QMainWindow(parent) {
 	connect(ui.volumeList, SIGNAL(itemSelectionChanged()), this, SLOT(updateVolumeSelected()));
 	connect(ui.imageList, SIGNAL(itemSelectionChanged()), this, SLOT(updateImageSelected()));
 
+	connect(img_widget, SIGNAL(updateN(int)), this, SLOT(updateImageN(int)));
+
 	connect(ui.actionRegister, SIGNAL(triggered()), this, SLOT(registerVolumeImage()));
 	connect(ui.actionFuse, SIGNAL(triggered()), this, SLOT(fuseVolumeImage()));
 }
@@ -52,6 +54,20 @@ void Viewer::updateVolumeSelected() {
 void Viewer::updateImageSelected() {
 	img_widget->setImage(&images[ui.imageList->currentRow()]);
 	img_widget->updateView();
+}
+
+void Viewer::updateImageN(int n) {
+	int min_image_n = INT_MAX;
+	for (int i = 0; i < images.size(); ++i) {
+		if (min_image_n > images[i].data.size())
+			min_image_n = images[i].data.size();
+	}
+	if (n >= min_image_n)
+		return;
+	for (int i = 0; i < images.size(); ++i)
+		images[i].n = n;
+	vtk_widget->current_scalar_id = n;
+	vtk_widget->updateView();
 }
 
 void Viewer::registerVolumeImage() {
@@ -109,42 +125,54 @@ void Viewer::fuseVolumeImage() {
 	}
 	inFile.close();
 
-	std::vector<int> scalars;
-	for (int i = 0; i < vtk_widget->mesh->GetNumberOfPoints(); ++i) {
-		scalars.push_back(0);
+	int min_image_n = INT_MAX;
+	for (int i = 0; i < images.size(); ++i) {
+		if (min_image_n > images[i].data.size())
+			min_image_n = images[i].data.size();
 	}
 
-	for (int i = 0; i < transforms.size(); ++i) {
-		Eigen::Vector3d R_vector;
-		R_vector << transforms[i](0), transforms[i](1), transforms[i](2);
-		Eigen::Matrix3d R = rotate_vector2matrix(R_vector);
-
-		Eigen::Vector3d T;
-		T << transforms[i](3), transforms[i](4), transforms[i](5);
-
-		double N = transforms[i](6);
-
+	std::vector<std::vector<int>> scalars;
+	for (int i = 0; i < min_image_n; ++i) {
+		std::vector<int> scalar;
 		for (int j = 0; j < vtk_widget->mesh->GetNumberOfPoints(); ++j) {
-			double p[3];
-			vtk_widget->mesh->GetPoint(j, p);
-			Eigen::Vector3d P;
-			P << p[0], p[1], p[2];
+			scalar.push_back(0);
+		}
+		scalars.push_back(scalar);
+	}
 
-			Eigen::Vector2d Y = Projection::perspective(P, R, T, N);
-			double x = Y(0) / images[i].dx + images[i].nx / 2;
-			double y = Y(1) / images[i].dy + images[i].ny / 2;
+	for (int n = 0; n < min_image_n; ++n) {
+		for (int i = 0; i < transforms.size(); ++i) {
+			Eigen::Vector3d R_vector;
+			R_vector << transforms[i](0), transforms[i](1), transforms[i](2);
+			Eigen::Matrix3d R = rotate_vector2matrix(R_vector);
 
-			if ((int)x < 0 || (int)x >= images[i].nx) {
-				scalars[j] = 1;
-				continue;
-			}
-			if ((int)y < 0 || (int)y >= images[i].ny) {
-				scalars[j] = 1;
-				continue;
-			}
-			if (images[i].at(images[i].n, x, y) == 255) {
-				scalars[j] = 1;
-				continue;
+			Eigen::Vector3d T;
+			T << transforms[i](3), transforms[i](4), transforms[i](5);
+
+			double N = transforms[i](6);
+
+			for (int j = 0; j < vtk_widget->mesh->GetNumberOfPoints(); ++j) {
+				double p[3];
+				vtk_widget->mesh->GetPoint(j, p);
+				Eigen::Vector3d P;
+				P << p[0], p[1], p[2];
+
+				Eigen::Vector2d Y = Projection::perspective(P, R, T, N);
+				double x = Y(0) / images[i].dx + images[i].nx / 2;
+				double y = Y(1) / images[i].dy + images[i].ny / 2;
+
+				if ((int)x < 0 || (int)x >= images[i].nx) {
+					scalars[n][j] = 1;
+					continue;
+				}
+				if ((int)y < 0 || (int)y >= images[i].ny) {
+					scalars[n][j] = 1;
+					continue;
+				}
+				if (images[i].at(n, x, y) == 255) {
+					scalars[n][j] = 1;
+					continue;
+				}
 			}
 		}
 	}
