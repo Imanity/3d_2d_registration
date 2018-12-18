@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSAReader", "DSAReader\DSAR
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Viewer", "Viewer\Viewer.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3d_2d_fuse", "3d_2d_fuse\3d_2d_fuse.vcxproj", "{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -39,6 +41,14 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|x64
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Debug|x64.ActiveCfg = Debug|x64
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Debug|x64.Build.0 = Debug|x64
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Debug|x86.ActiveCfg = Debug|Win32
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Debug|x86.Build.0 = Debug|Win32
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Release|x64.ActiveCfg = Release|x64
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Release|x64.Build.0 = Release|x64
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Release|x86.ActiveCfg = Release|Win32
+		{0363BC5A-E2ED-4AC5-BBD1-990E82F0DE6A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

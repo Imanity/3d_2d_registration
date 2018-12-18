@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ImgWidget.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.11.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,8 @@
 #define UI_IMGWIDGET_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QWidget>
 
@@ -49,8 +46,8 @@ public:
 
     void retranslateUi(QWidget *ImgWidget)
     {
-        ImgWidget->setWindowTitle(QApplication::translate("ImgWidget", "ImgWidget", Q_NULLPTR));
-        label->setText(QApplication::translate("ImgWidget", "TextLabel", Q_NULLPTR));
+        ImgWidget->setWindowTitle(QApplication::translate("ImgWidget", "ImgWidget", nullptr));
+        label->setText(QApplication::translate("ImgWidget", "TextLabel", nullptr));
     } // retranslateUi
 
 };

@@ -33,8 +33,8 @@ public:
 	int current_scalar_id = 0;
 
 private:
+	VolumeData * volume = NULL;
 	vtkSmartPointer<vtkRenderer> renderer;
-	VolumeData *volume = NULL;
 	RENDERING_MODE renderingMode = MESH_RENDERING;
 	bool isFirstRead;
 
