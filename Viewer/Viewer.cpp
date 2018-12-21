@@ -23,6 +23,10 @@ Viewer::Viewer(QWidget *parent)	: QMainWindow(parent) {
 
 	connect(ui.actionRegister, SIGNAL(triggered()), this, SLOT(registerVolumeImage()));
 	connect(ui.actionFuse, SIGNAL(triggered()), this, SLOT(fuseVolumeImage()));
+
+	connect(ui.image_origin_mode, SIGNAL(clicked()), this, SLOT(setImageModeToOrigin()));
+	connect(ui.image_bin_mode, SIGNAL(clicked()), this, SLOT(setImageModeToBin()));
+	connect(ui.image_fuse_mode, SIGNAL(clicked()), this, SLOT(setImageModeToFuse()));
 }
 
 void Viewer::addVolume() {
@@ -53,6 +57,7 @@ void Viewer::updateVolumeSelected() {
 
 void Viewer::updateImageSelected() {
 	img_widget->setImage(&images[ui.imageList->currentRow()]);
+	img_widget->setImageId(ui.imageList->currentRow());
 	img_widget->updateView();
 }
 
@@ -158,4 +163,22 @@ void Viewer::fuseVolumeImage() {
 	vtk_widget->updateScalars(scalars);
 
 	vtk_widget->setRenderingMode(MESH_RENDERING_WITH_SCALARS);
+
+	img_widget->setFuseParams(points, transforms);
+	img_widget->setImageId(ui.imageList->currentRow());
+}
+
+void Viewer::setImageModeToOrigin() {
+	img_widget->setImageMode(ORIGIN_IMAGE);
+	img_widget->updateView();
+}
+
+void Viewer::setImageModeToBin() {
+	img_widget->setImageMode(BIN_IMAGE);
+	img_widget->updateView();
+}
+
+void Viewer::setImageModeToFuse() {
+	img_widget->setImageMode(FUSE_IMAGE);
+	img_widget->updateView();
 }

@@ -42,6 +42,10 @@ public:
     QPushButton *imageAdd;
     QListWidget *imageList;
     QVBoxLayout *imageLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *image_origin_mode;
+    QPushButton *image_bin_mode;
+    QPushButton *image_fuse_mode;
     QVBoxLayout *vtkLayout;
     QToolBar *mainToolBar;
 
@@ -129,6 +133,30 @@ public:
 
         verticalLayout->addLayout(imageLayout);
 
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        image_origin_mode = new QPushButton(centralWidget);
+        image_origin_mode->setObjectName(QStringLiteral("image_origin_mode"));
+        image_origin_mode->setMaximumSize(QSize(40, 16777215));
+
+        horizontalLayout_4->addWidget(image_origin_mode);
+
+        image_bin_mode = new QPushButton(centralWidget);
+        image_bin_mode->setObjectName(QStringLiteral("image_bin_mode"));
+        image_bin_mode->setMaximumSize(QSize(40, 16777215));
+
+        horizontalLayout_4->addWidget(image_bin_mode);
+
+        image_fuse_mode = new QPushButton(centralWidget);
+        image_fuse_mode->setObjectName(QStringLiteral("image_fuse_mode"));
+        image_fuse_mode->setMaximumSize(QSize(40, 16777215));
+
+        horizontalLayout_4->addWidget(image_fuse_mode);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
         verticalLayout->setStretch(0, 1);
         verticalLayout->setStretch(1, 1);
         verticalLayout->setStretch(2, 1);
@@ -171,6 +199,9 @@ public:
         volumeAdd->setText(QApplication::translate("ViewerClass", "+", nullptr));
         label_2->setText(QApplication::translate("ViewerClass", "\344\272\214\347\273\264\345\233\276\345\203\217", nullptr));
         imageAdd->setText(QApplication::translate("ViewerClass", "+", nullptr));
+        image_origin_mode->setText(QApplication::translate("ViewerClass", "\345\216\237\345\247\213", nullptr));
+        image_bin_mode->setText(QApplication::translate("ViewerClass", "\344\272\214\345\200\274", nullptr));
+        image_fuse_mode->setText(QApplication::translate("ViewerClass", "\350\236\215\345\220\210", nullptr));
     } // retranslateUi
 
 };

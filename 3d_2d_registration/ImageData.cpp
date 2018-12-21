@@ -114,6 +114,10 @@ void ImageData::show(int n) {
 }
 
 void ImageData::binaryzation() {
+	data_origin.clear();
+	for (int i = 0; i < data.size(); ++i)
+		data_origin.push_back(data[i].clone());
+
 	for (int n = 0; n < data.size(); ++n) {
 		for (int i = 0; i < nx; ++i) for (int j = 0; j < ny; ++j) {
 			data[n].at<uchar>(j, i) = data[n].at<uchar>(j, i) < 100 ? 0 : 255;

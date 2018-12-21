@@ -24,6 +24,10 @@ public slots:
 	void registerVolumeImage();
 	void fuseVolumeImage();
 
+	void setImageModeToOrigin();
+	void setImageModeToBin();
+	void setImageModeToFuse();
+
 private:
 	Ui::ViewerClass ui;
 

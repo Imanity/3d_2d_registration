@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,0">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
@@ -68,7 +68,50 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="imageLayout" stretch=""/>
+       <layout class="QVBoxLayout" name="imageLayout"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QPushButton" name="image_origin_mode">
+          <property name="maximumSize">
+           <size>
+            <width>40</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>原始</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="image_bin_mode">
+          <property name="maximumSize">
+           <size>
+            <width>40</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>二值</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="image_fuse_mode">
+          <property name="maximumSize">
+           <size>
+            <width>40</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>融合</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>

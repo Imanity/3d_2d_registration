@@ -28,6 +28,7 @@ public:
 public:
 	int n = 0;
 	std::vector<cv::Mat> data;
+	std::vector<cv::Mat> data_origin;
 	int nx, ny;
 	float dx, dy;
 	int distance_source_detector, distance_source_patient;
